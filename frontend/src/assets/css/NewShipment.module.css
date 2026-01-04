@@ -1,0 +1,19 @@
+.section_title {
+    font-size: 25px;
+    font-weight: lighter;
+    font-family: sans-serif;
+}
+
+.form-group label {
+    font-family: sans-serif;
+    font-size: 14px;
+    color: grey;
+}
+
+.form-group label span {
+    color: lightcoral;
+}
+
+.form-group input {
+    background-color: #F5F5F5;
+}

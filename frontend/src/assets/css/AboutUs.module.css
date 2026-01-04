@@ -1,0 +1,63 @@
+.required_container img {
+    width: 100%;
+    height: 300px;
+}
+
+.about_us_image_container {
+    margin: 70px 0px;
+}
+
+.about_us_image_container img {
+    width: 100%;
+}
+
+.about_us_writeups_container {
+    padding: 70px 0px;
+}
+
+.about_us_header {
+    font-size: 30px;
+    color: #3579F6;
+    font-family: sans-serif;
+}
+
+.horizontal_line {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #7B5541, transparent);
+    margin: 2rem 0;
+}
+
+.about_us_paragraphs p {
+    font-family: sans-serif;
+    color: grey;
+}
+
+.team_container {
+    background-color: #05121C;
+    padding: 70px 0px;
+}
+
+.team_member_image img {
+    width: 100%;
+    height: 300px;
+}
+
+.team_description {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.team_description p:first-child {
+    color: white;
+    font-size: 20px;
+    font-weight: lighter;
+    margin-bottom: 0px;
+    font-family: sans-serif;
+}
+
+.team_description p:last-child {
+    font-size: 17px;
+    font-family: sans-serif;
+    color: grey;
+}

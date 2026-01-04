@@ -1,0 +1,204 @@
+:root {
+    --main: #F9F9FF;
+}
+
+body {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.nav_main_container {
+    padding-top: 17px;
+}
+
+@media screen and (max-width: 1000px) {
+    .nav_main_container {
+        padding: 5px 0px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .google_translator {
+        padding-top: 12px;
+    }
+}
+
+.layout_container {
+    padding: 20px 0px;
+    background-color: white;
+}
+
+.logo_container {
+    width: 12%;
+    margin: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .logo_container {
+        width: 40%;
+    }
+}
+
+.logo_container img {
+    width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+    .nav_links_container {
+        display: none;
+    }
+}
+
+.menu_button_container {
+    display: none;
+}
+
+@media screen and (max-width: 1000px) {
+    .menu_button_container {
+        display: block;
+        color: white;
+        font-size: 28px;
+        padding: 0px;
+        float: right;
+    }
+
+    .dropdown_custom {
+        float: right !important;
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+
+    .dropdown_custom button {
+        background-color: none !important;
+        color: white !important;
+        font-size: 26px !important;
+    }
+
+    .dropdown_menu_custom {
+        width: 270px;
+        border-radius: unset !important;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border: unset !important;
+        border-bottom: 4px solid #FFC400 !important;
+    }
+
+    .dropdown_menu_custom a {
+        display: block;
+        padding: 6px 20px;
+        text-decoration: none;
+        color: #777777;
+        font-family: sans-serif;
+    }
+}
+
+.nav_links {
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav_links a {
+    text-decoration: none;
+    font-size: 13px;
+    color: silver;
+    padding-bottom: 17px;
+    font-family: sans-serif;
+}
+
+.nav_links .active {
+    color: #FFC400;
+    border-bottom: 4px solid #FFC400;
+}
+
+.nav_links .notActive {
+    color: grey;
+}
+
+.register_btn p {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.users_intro {
+    text-align: center;
+    margin: 20px 0px 0px 0px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.admin_intro {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.admin_intro a {
+    text-decoration: none;
+}
+
+.modal_body {
+    padding: 40px 20px 70px 20px;
+}
+
+.modal_close {
+    /* float: right; */
+    display: block;
+    outline: none;
+    border: none;
+}
+
+.modal_close:focus {
+    outline: none;
+    border: none;
+}
+
+.modal_logo {
+    width: 150px;
+    margin: auto;
+}
+
+.modal_logo img {
+    width: 100%;
+    display: block;
+}
+
+.tracking_form {
+    margin-top: 100px;
+}
+
+.tracking_form input {
+    padding: 15px 20px;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    outline: none !important;
+}
+
+.form-group {
+    margin-top: 20px;
+}
+
+.form-group input {
+    border-radius: unset !important;
+}
+
+.form-group button {
+    background-color: #02214D;
+    color: white;
+    width: 100%;
+    padding: 6px 0px;
+    border: unset;
+    margin-top: 20px;
+}
+
+.account_status {
+    margin-top: 20px;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+.account_status p span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
