@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from '../../assets/css/NewShipment.module.css';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const NewShipment = () => {
     const [formDataState, setFormDataState] = useState({
@@ -39,8 +40,11 @@ const NewShipment = () => {
         }
     }
 
+    const [submitBtn, setSubmitBtn] = useState(false);
+    const navigate = useNavigate();
     const handleSubmission = async(event) => {
         event.preventDefault();
+        setSubmitBtn(true);
         try {
             const formData = new FormData();
 
@@ -68,7 +72,10 @@ const NewShipment = () => {
             }   
 
             else {
-                toast.error('Package image is required', {toastId: 'image-missing'});
+                setTimeout(() => {
+                    toast.error('Package image is required', {toastId: 'image-missing'});
+                    setSubmitBtn(false);
+                }, 3000)
                 return;
             }
 
@@ -83,21 +90,34 @@ const NewShipment = () => {
 
             const request = await response.json();
             if (!response.ok) {
-                toast.error(request.message || `Server responded with a ${response.status} code` || 'An error occred while creating shipment', {toastId: 'something-error'});
+                setTimeout(() => {
+                    toast.error(request.message || `Server responded with a ${response.status} code` || 'An error occred while creating shipment', {toastId: 'something-error'});
+                    setSubmitBtn(false);
+                }, 3000)
                 return;
             }
 
             if (request.status === 'success') {
-                toast.success(request.message || 'Shipment has been created successfullt', {toastId: 'success'});
+                setTimeout(() => {
+                    toast.success(request.message || 'Shipment has been created successfullt', {toastId: 'success'});
+                    setSubmitBtn(false);
+                }, 3000);
+                navigate('/admin/management');
             }
 
             else {
-                toast.error(request.message || 'Something went wrong', {toastId: 'something-error'});
+                setTimeout(() => {
+                    toast.error(request.message || 'Something went wrong', {toastId: 'something-error'});
+                    setSubmitBtn(false);
+                }, 3000)
             }
         }
 
         catch (error) {
-            toast.error(error.message || 'Something went wrong', {toastId: 'network-error'});
+            setTimeout(() => {
+                toast.error(error.message || 'Something went wrong', {toastId: 'network-error'});
+                setSubmitBtn(false);
+            }, 3000)
         }
     }
 
@@ -284,7 +304,7 @@ const NewShipment = () => {
                     {/* submit */}
                     <div className="col-12 col-md-6 col-lg-4">
                         <div className={`${styles['form-group']} form-group mb-4`}>
-                            <button type="submit" className='btn btn-primary form-control'>Create <span className='bi bi-plus'></span></button>
+                            <button type="submit" disabled={submitBtn} className='btn btn-primary form-control'>{submitBtn ? 'CREATING...': 'Create'} <span className={`${submitBtn ? 'spinner-border spinner-border-sm text-white': 'bi bi-plus'}`}></span></button>
                         </div>
                     </div>
                 </div>

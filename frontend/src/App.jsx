@@ -10,6 +10,7 @@ import Track from './pages/public/Track';
 import AdminLayout from './component/admin/Header';
 import Dashboard from './pages/admin/Dashboard';
 import NewShipment from './pages/admin/NewShipment';
+import Management from './pages/admin/Management';
 
 const App = () => {
     /**
@@ -81,6 +82,7 @@ const App = () => {
                     <Route path='/admin' element={<AdminLayout />}>
                         <Route element={<Dashboard />} end index />
                         <Route path='new_shipment' end element={<NewShipment />} />
+                        <Route path='management' end element={<Management />} />
                     </Route>
                 </Routes>
 

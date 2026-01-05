@@ -2,21 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import {
     FiHome,
-    FiSettings,
-    FiBell,
     FiMenu,
     FiChevronLeft,
     FiLogOut,
-    FiUser,
     FiGrid,
-    FiPackage
+    FiPackage,
+    FiGlobe
 } from 'react-icons/fi';
 import { useUser } from '../context/User';
 import styles from '../../assets/css/AdminHeader.module.css';
 import LogoImg from '../../assets/image/logo/logo.PNG';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { Nav } from 'react-bootstrap';
 
 const AdminLayout = () => {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -25,6 +22,7 @@ const AdminLayout = () => {
     const menuItems = [
         { id: 'dashboard', label: 'Dashboard', icon: <FiHome />, path: '/admin' },
         { id: 'shipment', label: 'New Shipment', icon: <FiPackage />, path: '/admin/new_shipment' },
+        { id: 'manage', label: 'Manage Shipment', icon: <FiGlobe />, path: '/admin/management' }
     ];
 
     const { user, refreshUser } = useUser();
