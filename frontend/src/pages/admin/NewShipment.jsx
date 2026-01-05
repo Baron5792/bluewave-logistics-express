@@ -16,7 +16,10 @@ const NewShipment = () => {
         origin_address: '',
         product_destination: '',
         recipient_name: '',
-        recipient_email: ''
+        recipient_email: '',
+        sender_name: '',
+        sender_email: '',
+        sender_country: ''
     })
 
     const handleInput = (e) => {
@@ -56,6 +59,9 @@ const NewShipment = () => {
             formData.append('product_destination', formDataState.product_destination);
             formData.append('recipient_name', formDataState.recipient_name);
             formData.append('recipient_email', formDataState.recipient_email);
+            formData.append('sender_name', formDataState.sender_name);
+            formData.append('sender_email', formDataState.sender_email);
+            formData.append('sender_country', formDataState.sender_country);
 
             if (formDataState.package_image) {
                 formData.append('package_image', formDataState.package_image);
@@ -71,16 +77,13 @@ const NewShipment = () => {
              */
             const response = await fetch(`${import.meta.env.VITE_APP_API_URL}admin/create_new_shipment.php`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
                 credentials: 'include',
                 body: formData
             })
 
             const request = await response.json();
             if (!response.ok) {
-                toast.error(`Server responded with a ${response.status} code` || 'An error occred while creating shipment', {toastId: 'something-error'});
+                toast.error(request.message || `Server responded with a ${response.status} code` || 'An error occred while creating shipment', {toastId: 'something-error'});
                 return;
             }
 
@@ -89,7 +92,7 @@ const NewShipment = () => {
             }
 
             else {
-                
+                toast.error(request.message || 'Something went wrong', {toastId: 'something-error'});
             }
         }
 
@@ -110,28 +113,28 @@ const NewShipment = () => {
                         <div className="col-12 col-md-6 col-lg-4">
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Default Package Name <span>*</span></label>
-                                <input value={formDataState.default_package_name} type="text" onChange={handleInput} name="default_package_name" required className='form-control' id="" />
+                                <input value={formDataState.default_package_name} type="text" onChange={handleInput} name="default_package_name"  className='form-control' id="" />
                             </div>
                         </div>
 
                         <div className="col-12 col-md-6 col-lg-4">
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Shipping Date <span>*</span></label>
-                                <input value={formDataState.shipping_date} type="date" onChange={handleInput} name="shipping_date" required className='form-control' id="" />
+                                <input value={formDataState.shipping_date} type="date" onChange={handleInput} name="shipping_date"  className='form-control' id="" />
                             </div>
                         </div>
 
                         <div className="col-12 col-md-6 col-lg-4">
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Expected Delivery Date <span>*</span></label>
-                                <input value={formDataState.delivery_date} type="date" name="delivery_date" onChange={handleInput} required className='form-control' id="" />
+                                <input value={formDataState.delivery_date} type="date" name="delivery_date" onChange={handleInput}  className='form-control' id="" />
                             </div>
                         </div>
 
                         <div className="col-12 col-md-6 col-lg-4">
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Service Type <span>*</span></label>
-                                <select value={formDataState.service_type} name="service_type" onChange={handleInput} required className='form-control' id="service_type">
+                                <select value={formDataState.service_type} name="service_type" onChange={handleInput}  className='form-control' id="service_type">
                                     <option value="express Delivery">Express Delivery</option>
                                     <option value="standard Delivery">Standard Delivery</option>
                                     <option value="economy Delivery">Economy Delivery</option>
@@ -187,7 +190,7 @@ const NewShipment = () => {
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Weight <span>*</span></label>
                                 <div className="input-group">
-                                    <input value={formDataState.weight} type="number" onChange={handleInput} name="weight" required className='form-control' id="" />
+                                    <input value={formDataState.weight} type="number" onChange={handleInput} name="weight"  className='form-control' id="" />
                                     <button type="button" className='bg-secondary btn btn-light text-light'>KG</button>
                                 </div>
                             </div>
@@ -196,14 +199,14 @@ const NewShipment = () => {
                         <div className="col-12 col-md-6 col-lg-4">
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Contents <span>*</span></label>
-                                <input type="text" value={formDataState.content} name="content" onChange={handleInput} required className='form-control' id="" />
+                                <input type="text" value={formDataState.content} name="content" onChange={handleInput}  className='form-control' id="" />
                             </div>
                         </div>
 
                         <div className="col-12 col-md-6 col-lg-4">
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Package Type <span>*</span></label>
-                                <select name="package_type" value={formDataState.package_type} onChange={handleInput} required className='form-control' id="package_type">
+                                <select name="package_type" value={formDataState.package_type} onChange={handleInput}  className='form-control' id="package_type">
                                     <option value="box">Box</option>
                                     <option value="envelope">Envelope</option>
                                     <option value="tube">Tube</option>
@@ -219,37 +222,62 @@ const NewShipment = () => {
                         <div className="col-12 col-md-6 col-lg-4">
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Package Image <span>*</span></label>
-                                <input type="file" name="package_image" onChange={handleInput} required className='form-control' id="" />
+                                <input type="file" name="package_image" onChange={handleInput}  className='form-control' id="" />
                             </div>
                         </div>
+
+                        
+                        {/* senders information */}
+                        <p className={styles['section_title']}>Sender Information</p>
+                        <div className="col-12 col-md-6 col-lg-4">
+                            <div className={`${styles['form-group']} form-group mb-4`}>
+                                <label htmlFor="dafault name">Sender's Name <span>*</span></label>
+                                <input type="text" name="sender_name" value={formDataState.sender_name} onChange={handleInput}  className='form-control' id="" />
+                            </div>
+                        </div>
+
+                        <div className="col-12 col-md-6 col-lg-4">
+                            <div className={`${styles['form-group']} form-group mb-4`}>
+                                <label htmlFor="dafault name">Sender's Email <span>*</span></label>
+                                <input type="text" name="sender_email" value={formDataState.sender_email} onChange={handleInput}  className='form-control' id="" />
+                            </div>
+                        </div>
+
+                        <div className="col-12 col-md-6 col-lg-4">
+                            <div className={`${styles['form-group']} form-group mb-4`}>
+                                <label htmlFor="dafault name">Sender's Country <span>*</span></label>
+                                <input type="text" name="sender_country" value={formDataState.sender_country} onChange={handleInput}  className='form-control' id="" />
+                            </div>
+                        </div>
+
 
                         {/* Shipping Route & Progress */}
                         <p className={styles['section_title']}>Route Information</p>
                         <div className="col-12 col-md-6 col-lg-4">
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Origin Address <span>*</span></label>
-                                <input type="text" name="origin_address" value={formDataState.origin_address} onChange={handleInput} required className='form-control' id="" />
+                                <input type="text" name="origin_address" value={formDataState.origin_address} onChange={handleInput}  className='form-control' id="" />
                             </div>
                         </div>
 
                         <div className="col-12 col-md-6 col-lg-4">
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Product Destination <span>*</span></label>
-                                <input type="text" name="product_destination" value={formDataState.product_destination} onChange={handleInput} required className='form-control' id="" />
+                                <input type="text" name="product_destination" value={formDataState.product_destination} onChange={handleInput}  className='form-control' id="" />
                             </div>
                         </div>
 
                         <div className="col-12 col-md-6 col-lg-4">
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Recipient's Name <span>*</span></label>
-                                <input type="text" name="recipient_name" value={formDataState.recipient_name} onChange={handleInput} required className='form-control' id="" />
+                                <input type="text" name="recipient_name" value={formDataState.recipient_name} onChange={handleInput}  className='form-control' id="" />
                             </div>
                         </div>
 
                         <div className="col-12 col-md-6 col-lg-4">
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Recipient's E-Mail <span>*</span></label>
-                                <input type="email" name="recipient_email" value={formDataState.recipient_email} onChange={handleInput} required className='form-control' id="" />
+                                <input type="email" name="recipient_email" value={formDataState.recipient_email} onChange={handleInput}  className='form-control' id="" />
                             </div>
                         </div>
                     </div>
