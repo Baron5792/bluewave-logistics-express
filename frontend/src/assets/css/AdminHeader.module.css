@@ -330,6 +330,10 @@
 /* for table design */
 table {
   width: 100%;
+  min-width: 800px; /* Minimum width for horizontal scroll */
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   text-align: center;
 }
 
@@ -341,6 +345,7 @@ table thead tr th {
 
 table tbody tr {
   background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 table tbody tr td {

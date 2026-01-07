@@ -20,7 +20,8 @@ const NewShipment = () => {
         recipient_email: '',
         sender_name: '',
         sender_email: '',
-        sender_country: ''
+        sender_country: '',
+        current_location: ''
     })
 
     const handleInput = (e) => {
@@ -66,6 +67,7 @@ const NewShipment = () => {
             formData.append('sender_name', formDataState.sender_name);
             formData.append('sender_email', formDataState.sender_email);
             formData.append('sender_country', formDataState.sender_country);
+            formData.append('current_location', formDataState.current_location);
 
             if (formDataState.package_image) {
                 formData.append('package_image', formDataState.package_image);
@@ -243,6 +245,13 @@ const NewShipment = () => {
                             <div className={`${styles['form-group']} form-group mb-4`}>
                                 <label htmlFor="dafault name">Package Image <span>*</span></label>
                                 <input type="file" name="package_image" onChange={handleInput}  className='form-control' id="" />
+                            </div>
+                        </div>
+
+                        <div className="col-12 col-md-6 col-lg-4">
+                            <div className={`${styles['form-group']} form-group mb-4`}>
+                                <label htmlFor="dafault name">Current Location <span>*</span></label>
+                                <input type="text" value={formDataState.current_location} name="current_location" onChange={handleInput}  className='form-control' id="" />
                             </div>
                         </div>
 

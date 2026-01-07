@@ -151,54 +151,56 @@ const Dashboard =  () => {
     }
     return (
         <>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Username</th>
-                        <th>E-mail</th>
-                        <th>Reg Date</th>
-                        <th>Status</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users && users.length > 0 ? (
-                        users.map((item, index) => (
-                            <tr key={item.id}>
-                                <td>{index + 1}.</td>
-                                <td>{item?.username}</td>
-                                <td>{item?.email}</td>
-                                <td>{new Date(item?.date).toLocaleDateString()}</td>
-                                <td>
-                                    {item.admin === 0 ? (
-                                       'user'
-                                    ): (
-                                        'admin'
-                                    )}
-                                </td>
-                                <td>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="normal">
-                                            <span className="bi bi-three-dots"></span>
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <div className={styles['dropdown_content']}>
-                                                <p onClick={() => handleEdit(item.id)}>Edit</p>
-                                                <p onClick={() => handleDelete(item.id)}>Delete</p>
-                                            </div>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </td>
-                            </tr>
-                        ))
-                    ): (
+            <div className={styles['table_wrapper']}>
+                <table>
+                    <thead>
                         <tr>
-                            <td colSpan={6}>No user found</td>
+                            <th>#</th>
+                            <th>Username</th>
+                            <th>E-mail</th>
+                            <th>Reg Date</th>
+                            <th>Status</th>
+                            <th></th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {users && users.length > 0 ? (
+                            users.map((item, index) => (
+                                <tr key={item.id}>
+                                    <td>{index + 1}.</td>
+                                    <td>{item?.username}</td>
+                                    <td>{item?.email}</td>
+                                    <td>{new Date(item?.date).toLocaleDateString()}</td>
+                                    <td>
+                                        {item.admin === 0 ? (
+                                        'user'
+                                        ): (
+                                            'admin'
+                                        )}
+                                    </td>
+                                    <td>
+                                        <Dropdown>
+                                            <Dropdown.Toggle variant="normal">
+                                                <span className="bi bi-three-dots"></span>
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                <div className={styles['dropdown_content']}>
+                                                    <p onClick={() => handleEdit(item.id)}>Edit</p>
+                                                    <p onClick={() => handleDelete(item.id)}>Delete</p>
+                                                </div>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </td>
+                                </tr>
+                            ))
+                        ): (
+                            <tr>
+                                <td colSpan={6}>No user found</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
 
 
 

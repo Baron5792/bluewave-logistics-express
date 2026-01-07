@@ -141,9 +141,9 @@ const AdminLayout = () => {
                 </div>
 
                 {/* Footer */}
-                <footer className={styles.footer}>
+                {/* <footer className={styles.footer}>
                     <p>© {new Date().getFullYear()} AdminPanel. All rights reserved.</p>
-                </footer>
+                </footer> */}
             </main>
         </div>
     );
